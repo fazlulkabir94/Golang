@@ -59,6 +59,39 @@ func (e Employee) getEmployeeInfo() string {
 	return "_______________________"
 }
 
+type coordinates interface {
+	xaxis() int
+	yaxis() int
+}
+
+// Point2D ...
+type Point2D struct {
+	x int
+	y int
+}
+
+func (s Point2D) xaxis() int {
+	return s.x
+}
+
+func (s Point2D) yaxis() int {
+	return s.y
+}
+
+func findCoordinates(a coordinates) {
+	fmt.Println("x:", a.xaxis(), "y:", a.yaxis())
+}
+
+type coordinate int
+
+func (s coordinate) xaxis() int {
+	return int(s)
+}
+
+func (s coordinate) yaxis() int {
+	return 0
+}
+
 func main() {
 	e := Employee{
 		firstName: "shohag",
@@ -79,4 +112,7 @@ func main() {
 		},
 	}
 	fmt.Println(e.getEmployeeInfo())
+	x := Point2D{x: -1, y: 23}
+	fmt.Println(x)
+	findCoordinates(x)
 }
